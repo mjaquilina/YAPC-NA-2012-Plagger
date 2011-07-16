@@ -1,0 +1,3 @@
+[% FOREACH entry = feed.entries -%]
+    [% entry.body %]
+[% END %]

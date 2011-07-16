@@ -1,0 +1,24 @@
+=head1 DESCRIPTION
+
+Plagger configuration to publish YAPC::NA 2012 blog posts to various sources.
+
+=head1 SYNOPSIS
+
+./plagger --config /home/aquilina/YAPC-NA-2012-Plagger/config.yml
+
+=head1 PREREQUISITES
+
+Plagger (http://search.cpan.org/~miyagawa/Plagger-0.7.1/lib/Plagger.pm)
+
+=head1 FIRST-TIME USAGE
+
+Comment out config for modules with Publish::* in the name. Otherwise, Plagger
+will pull down all posts from the RSS feed and publish them to those sources.
+That might be a little annoying to users of the sites we're publishing to.
+
+=head1 USAGE
+
+Create a cronjob that calls Plagger (see the SYNOPSIS) with the provided config.
+
+=cut
+

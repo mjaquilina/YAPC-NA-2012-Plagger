@@ -1,0 +1,47 @@
+global:
+
+  # may as well operate on Central time
+  timezone: America/Chicago
+
+  log:
+    # non-verbose mode, use this for cron
+    level: error # use info for verbosity
+
+  assets_path: /home/maquilin/YAPC2012-Plagger/assets
+
+plugins:
+
+  # Get posts from the YAPC::NA 2012 Tumblr
+  - module: Subscription::Config
+    config:
+      feed:
+        - http://feeds.feedburner.com/yapcna
+
+  # Don't post duplicates every time Plagger runs
+  - module: Filter::Rule
+    rule:
+      module: Deduped
+
+  # We want each entry on the YAPC Tumblr to be a "feed" -- i.e, something
+  # that becomes a post at the destination.
+  - module: Filter::BreakEntriesToFeeds
+    config:
+      # title should be post titles ("Domain for YAPC::NA 2012 Changed") rather
+      # than the title of the source, "YAPC::NA".
+      use_entry_title: 1
+
+  # Publish to Movable Type. Add one of these entries for each TypePad blog you
+  # wish to post to (blogs.perl.org, PerlBuzz).
+  - module: Publish::MT
+    config:
+      rsd: http://www.typepad.com/t/api
+      username: yapc_dev@ohpasw.com
+      password: password_goes_here
+      blog_id: blog_id_goes_here
+
+  # TODO: Publish to Reddit. API docs indicate that this is possible, attempts
+  # indicate that a CAPTCHA is required. Might have sometime to do with subreddit
+  # moderator status/validated email, investigating further.
+
+  # TODO: Publish to Digg
+
